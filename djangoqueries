@@ -30,6 +30,30 @@ from django.db.models import Value as V,Concat
  for result in results:
     print(result)
 ----------------------------------------------------------------------------------------------------------------------
+---------------------query3---------------------------------------------------------------------------
+-- Get all contacts based on emp_name
+select contact.number from contact
+left join employee
+on contact.employee_id=employee.e_id
+where employee.e_name='Jeevan';
+
+----DJANGO EQUIVALENT-------
+contacts_result=Contact.objects.select_related('employee_id').filter(employee_id__name='Jeevan').values('number')
+print(contacts_result)
+----------------------------------------------------------------------------------------------------------------------
+---------------------query4---------------------------------------------------------------------------
+-- Given a contact number find who it is associated with
+select employee.e_name
+from employee
+join contact
+on employee.e_id=contact.employee_id
+where contact.number=897546789;
+
+----DJANGO EQUIVALENT-------
+employee_result=Contact.objects.select_related('employee_id').filter(number=897546789).values('employee_id__name')
+print(employee_result)
+----------------------------------------------------------------------------------------------------------------------
+
 
 
 
