@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 
 def employee(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, world. You're at the employee index.")
