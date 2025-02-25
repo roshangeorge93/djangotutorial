@@ -7,3 +7,9 @@ for q in q0:
 q1=Contact.objects.filter(Emp__Name='e1')
 for q in q1:
     print(q.Number)
+
+
+--get employee name by giving number
+q2=Employee.objects.filter(contact__Number='1234567891')
+for q in q1:
+    print(q.Number)
