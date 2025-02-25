@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env  # Load environment variables from .env file
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+  app:
+    build: .
+    container_name: app
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
+    driver: local
