@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Employee
+from .models import Employee ,Contact
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 
@@ -50,4 +50,18 @@ def index(request):
     }
     return render(request, "index.html", context)
     
+def query1(request):
+    #Eid => contact nos 
+    employee_list = Employee.objects.get(id=2)
+    contact = []
+    contact = Contact.objects.filter(employee_id = employee_list.id).values('number')
+    context = {
+        "employee_list": employee_list ,
+    }
+    return HttpResponse (contact)
 
+def query2(request):
+    #contact no => Emp Details
+    contact = Contact.objects.get(number=7678895)
+    employee = Employee.objects.filter(id = contact.employee_id_id)
+    return HttpResponse (employee)
