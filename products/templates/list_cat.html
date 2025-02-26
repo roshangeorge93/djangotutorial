@@ -1,0 +1,9 @@
+{% if children_categories %}
+    <ul>
+    {% for students in children_categories %}
+        <li>{{ students }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

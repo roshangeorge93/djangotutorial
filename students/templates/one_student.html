@@ -1,0 +1,19 @@
+{% if ans %}
+    <table>
+    <tr>
+    <th>sem</th>
+    <th>AVG</th>
+    </tr>
+
+    {% for student  in ans %}
+    <tr>
+    <td>{{student.result__sem}}</td> 
+    <td>{{student.sgpa}}</td>       
+    </tr>
+    {% endfor %}
+
+    </table>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

@@ -1,0 +1,9 @@
+{% if employee_list %}
+    <ul>
+    {% for students in employee_list %}
+        <li><a href="/students/{{ students.id}}/">{{ students.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
