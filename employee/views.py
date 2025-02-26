@@ -26,11 +26,11 @@ def resp (request ,element_id ):
     except:
         return  HttpResponse(f"employee with this {element_id} is not present " )
     
-    # employee ={
-    #     'name' : employee_obj.ename,
-    #     'id': employee_obj.eid,
-    #     'Designation': employee_obj.designation
-    # }
+    employee ={
+        'name' : employee_obj.ename,
+        'id': employee_obj.eid,
+        'Designation': employee_obj.designation
+    }
 
     context ={
         'employee' : employee

@@ -8,41 +8,21 @@ from django.db.models import ExpressionWrapper , Sum ,Count,Avg, FloatField
 
 
 
-def respond (request):
-    return  HttpResponse("hello world")
-
-
-# def resp (request ,element_id ):
-#         try:
-#             return HttpResponse( Employee.objects.get(id=element_id))
-#         except ObjectDoesNotExist as E:
-#             return  HttpResponse(f"employee with this {element_id} is not present {E}",404 )
-
-             
-#         print(Employee.objects.filter(id=element_id).values('ename'))
-#         return HttpResponse( Employee.objects.filter(id=element_id).values('ename')[0]['ename'])
-
 def resp (request ,element_id ):
     try:
+        #aggregate Query
         employee_obj = Student.objects.get(id=element_id)
         ans = Student.objects.filter(id=element_id).annotate(sgpa = ExpressionWrapper(Avg('result__marks'),output_field=FloatField())).values('result__sem','sgpa')
 
     except:
         return  HttpResponse(f"employee with this {element_id} is not present " )
-    
-    employee ={
-        'name' : employee_obj.name,
-        'id': employee_obj.usn,
-    }
-
+   
 
     context ={
         'ans' : ans
-    }
-    
+    } 
     return render(request, "one_student.html", context)
       
-
 from django.http import HttpResponse
 
 
