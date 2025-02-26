@@ -6,3 +6,9 @@ from django.db.models import Avg,Sum,FloatField,Count,ExpressionWrapper
 q0 = Student.objects.values_list('Current_sem',flat=True ).distinct().all()
 for q in q0:
     print(q)
+
+
+# list all student belonging to sem 1
+q1=Student.objects.filter(Current_sem='1').values_list('Name',flat=True)
+for q in q1:
+    print(q)
