@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
+{% if latest_product_list %}
     <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - Price: ${{ product.price }} (Category: {{ product.category_id }})</li>
-        {% endfor %}
+    {% for product in latest_product_list %}
+        <li><a href="/products/{{product.id}}/">{{ product.name }}</a></li>
+    {% endfor %}
     </ul>
-</body>
-</html>
+{% else %}
+    <p>No products are available.</p>
+    {% endif %}

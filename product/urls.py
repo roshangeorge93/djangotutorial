@@ -1,8 +1,11 @@
 from django.urls import path
 from django.urls import path
-from .views import category_list, product_list
+from . import views
+from .views import parents, product_list
 
 urlpatterns = [
-    path('categories/', category_list, name='category_list'),
-    path('products/', product_list, name='product_list'),
+    path('categories/', parents, name='parents'),
+    path("<int:product_id>/", views.product_details, name="product_details"),
+    
+    path('', product_list, name='product_list'),
 ]

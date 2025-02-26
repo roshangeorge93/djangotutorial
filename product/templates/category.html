@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-   
-</head>
-<body>
-    <ul>
-        {% for category in categories %}
-            <li>{{ category.name }} (ID: {{ category.id }})</li>
-        {% endfor %}
+{% if child_categories %}
+    <ul class="list-group">
+    {% for students in child_categories %}
+        <li class="list-group-item" >{{ students }}</a></li>
+    {% endfor %}
     </ul>
-</body>
-</html>
+ 
+    {% block content %}
+    {% endblock %}
+ 
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

@@ -22,6 +22,6 @@ urlpatterns = [
     path('employees/',include('employee.urls')),
     path('index/', include('employee.urls')),
     path('student/', include('student.urls')),
-    path('',include('product.urls')),
-
+    path('categories/',include('product.urls')),
+    path('products/',include('product.urls')),
 ]
