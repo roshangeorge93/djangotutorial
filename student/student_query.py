@@ -12,3 +12,10 @@ for q in q0:
 q1=Student.objects.filter(Current_sem='1').values_list('Name',flat=True)
 for q in q1:
     print(q)
+
+
+# -- get all marks of a student given usn for the latest seem
+cur_sem=Student.objects.filter(Usn='vv006').values_list('Current_sem',flat=True).first()
+q3=Marks.objects.filter(Student_Id__Usn='vv006').filter(Sem_Id__Sem=cur_sem).values_list('Marks',flat=True)
+for q in q3:
+    print(q)
