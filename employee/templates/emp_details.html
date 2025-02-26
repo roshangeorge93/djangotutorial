@@ -1,0 +1,25 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% if employee %}
+    <table class="table table-bordered text-center" >
+    <tr class="align-middle" >
+    <th scope="col" >Name</th>
+    <th scope="col" >Eid</th>
+    <th scope="col">Designation</th>
+    </tr>
+    <tr class="align-middle" >
+    <td scope="col" >{{employee.name}}</td> 
+    <td scope="col" >{{employee.id}}</td>      
+    <td scope="col" >{{employee.Designation}}</td>      
+     
+    </tr>
+    </table>
+
+{% block content %}
+{% endblock %}
+
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
