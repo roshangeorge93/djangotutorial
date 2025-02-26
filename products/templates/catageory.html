@@ -1,0 +1,10 @@
+{% if category_list %}
+<h1>Catageory List</h1>
+    <ul>
+    {% for cat in category_list %}
+        <li> <a href="{{ cat.Cat_Id }}/"> {{ cat.Cat_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No catageory are available.</p>
+{% endif %}

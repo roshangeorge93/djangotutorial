@@ -1,0 +1,19 @@
+{% if sub_categeories %}
+<h1>Sub-catageory details</h1>
+
+    <ul>
+        <strong>Sub-Categories :</strong> 
+        
+    {% for cat in sub_categeories %}
+        
+        
+        <li>{{cat.sub_cat}}</li>
+       
+        
+
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Sub-Catageories are  Not available.</p>
+{% endif %}
