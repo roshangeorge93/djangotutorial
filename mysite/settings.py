@@ -29,7 +29,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-m$i&y0-u_q$w$+x%p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DJANGO_DEBUG', True)
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["0.0.0.0"]
 
 
 # Application definition
@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'employee',
+    'student',
+    'product',
 ]
 
 MIDDLEWARE = [

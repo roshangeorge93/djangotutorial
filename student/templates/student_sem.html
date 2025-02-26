@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Semester Marks</title>
+</head>
+<body>
+    <h2>Average Marks per Student per Semester</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Semester</th>
+                <th>Average Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in average_marks %}
+                <tr>
+                    <td>{{entry.student_id.name}}</td>
+                    <td>{{ entry.sem_id }}</td>
+                    <td>{{ entry.average_marks }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
