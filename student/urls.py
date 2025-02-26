@@ -24,5 +24,6 @@ urlpatterns = [
     path('', views.index,name="index"),
     path("<int:student_id>/", views.display,name="display"),
     # path(" ",views.display,name="display"),
+    
  ]
 

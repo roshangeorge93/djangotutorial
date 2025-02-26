@@ -25,3 +25,6 @@ def index(request):
     }
     
     return render(request, "student.html", context)
+
+
+
