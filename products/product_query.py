@@ -20,3 +20,8 @@ print(q3)
 #list all products and print brand name
 q4=Product.objects.select_related('B_id').values('P_name','B__B_name')
 print(q4)
+
+
+# list all sub categories under a category  based on parent_cat_id
+q5=Catageory.objects.filter(Parent_id=10).values('Parent_id','Cat_name')
+print(q5)
