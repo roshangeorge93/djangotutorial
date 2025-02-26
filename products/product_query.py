@@ -17,4 +17,6 @@ print(q2)
 q3=Product.objects.select_related('Cat_id').values('P_name','Cat__Cat_name')
 print(q3)
 
-
+#list all products and print brand name
+q4=Product.objects.select_related('B_id').values('P_name','B__B_name')
+print(q4)
