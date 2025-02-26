@@ -25,3 +25,9 @@ for q in q3:
 sub=Subject.objects.filter(Sub_name='DS').values_list('Sub_Id',flat=True).first()
 q4=Marks.objects.filter(Student_Id__Usn='vv003').get(Sub_Id=sub)
 print(q4.Marks)
+
+
+# -- get the total percentage of marks for a student in particular sem
+
+q5=Marks.objects.filter(Student_Id__Usn="vv001", Sem_Id__Sem=1).aggregate(Avg("Marks", default=0))
+print(q5)
