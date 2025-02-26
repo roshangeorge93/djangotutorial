@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+    <ul>
+        {% for category in categories %}
+            <li>{{ category.name }} (ID: {{ category.id }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
