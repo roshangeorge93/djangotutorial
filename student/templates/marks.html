@@ -1,0 +1,9 @@
+{% if Marks_list %}
+    <ul>
+    {% for marks in Marks_list %}
+        <li><a >Sem {{marks.marks__Sem_Id}}: {{ marks.sem_percentage }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No marks are available.</p>
+{% endif %}

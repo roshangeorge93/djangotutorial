@@ -1,0 +1,20 @@
+{% if Employee_details %}
+<h1>Employee details</h1>
+    <ul>
+    {% for emp in Employee_details %}
+        
+        <li><strong>Name: </strong>{{emp.Name}}</li>
+        <li><strong>Email:</strong> {{emp.Email}}</li>
+        <li><strong>Designation: </strong> {{emp.Designation}}</li>
+        <li><strong>Salary:</strong>  {{emp.Salary}}</li>
+        <li><strong>Department:</strong>  {{emp.department_id}}</li>
+        <li><strong>Experience:</strong>  {{emp.Experience}}</li>
+
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Employees are available.</p>
+{% endif %}
+
+
