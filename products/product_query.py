@@ -17,3 +17,4 @@ print(q2)
 q3=Product.objects.select_related('Cat_id').values('P_name','Cat__Cat_name')
 print(q3)
 
+
