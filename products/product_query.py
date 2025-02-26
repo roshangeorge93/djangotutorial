@@ -13,3 +13,7 @@ print(q1)
 q2=Product.objects.filter(Cat__Cat_name='android').values('P_name','Cat__Cat_name')
 print(q2)
 
+# list all category and their products
+q3=Product.objects.select_related('Cat_id').values('P_name','Cat__Cat_name')
+print(q3)
+
