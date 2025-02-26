@@ -19,3 +19,9 @@ cur_sem=Student.objects.filter(Usn='vv006').values_list('Current_sem',flat=True)
 q3=Marks.objects.filter(Student_Id__Usn='vv006').filter(Sem_Id__Sem=cur_sem).values_list('Marks',flat=True)
 for q in q3:
     print(q)
+
+
+# -- get all marks of a student given usn for a particular subject
+sub=Subject.objects.filter(Sub_name='DS').values_list('Sub_Id',flat=True).first()
+q4=Marks.objects.filter(Student_Id__Usn='vv003').get(Sub_Id=sub)
+print(q4.Marks)
