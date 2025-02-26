@@ -35,6 +35,13 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('', views.employee,name="employee"),
+    path("<int:employee_id>/", views.employee,name="employee"),
+     path("<int:employee_id>/", views.detail, name="detail"),
+    # ex: /polls/5/results/
+    path("<int:employee_id>/results/", views.results, name="results"),
+    # ex: /polls/5/vote/
+    path("<int:employee_id>/vote/", views.vote, name="vote"),
+    path("",views.index,name="index")
  ]
+
 
