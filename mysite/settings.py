@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'employee',
     'products',
     'students',
+    'bootstrap5',
+
     
 
 

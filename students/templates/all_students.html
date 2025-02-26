@@ -1,9 +1,16 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% if employee_list %}
-    <ul>
+    <ul class="list-group" >
     {% for students in employee_list %}
-        <li><a href="/students/{{ students.id}}/">{{ students.name }}</a></li>
+        <li class="list-group-item align-middle"><a href="/students/{{ students.id}}/">{{ students.name }}</a></li>
     {% endfor %}
     </ul>
+
+{% block content %}
+{% endblock %}
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
