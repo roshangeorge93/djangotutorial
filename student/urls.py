@@ -20,12 +20,9 @@ from django.contrib import admin
 from . import views
 from django.urls import include, path
 
-
-
-
-
-
 urlpatterns = [
-    path('', views.student,name="student"),
+    path('', views.index,name="index"),
+    path("<int:student_id>/", views.display,name="display"),
+    # path(" ",views.display,name="display"),
  ]
 
