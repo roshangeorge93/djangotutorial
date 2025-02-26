@@ -26,6 +26,7 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('', views.products,name="products"),
+    path('<int:product_P_Id>/', views.display,name="display"),
+    path("",views.index,name="index")
  ]
 
