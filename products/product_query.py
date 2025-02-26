@@ -25,3 +25,8 @@ print(q4)
 # list all sub categories under a category  based on parent_cat_id
 q5=Catageory.objects.filter(Parent_id=10).values('Parent_id','Cat_name')
 print(q5)
+
+
+# list all sub catagories under a list of categories based on id
+q6=Catageory.objects.filter(Parent_id=10).values('Cat_Id','Cat_name')
+print(q6)
