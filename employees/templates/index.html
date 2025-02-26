@@ -1,9 +1,10 @@
 {% if employee_list %}
+<h1>Employee List</h1>
     <ul>
     {% for emp in employee_list %}
-        <li><a href="employee/{{ emp.id }}/">{{ emp.Name }}</a></li>
+        <li> <a href="{{ emp.id }}/"> {{ emp.Name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No Employees are available.</p>
 {% endif %}
