@@ -31,3 +31,9 @@ print(q4.Marks)
 
 q5=Marks.objects.filter(Student_Id__Usn="vv001", Sem_Id__Sem=1).aggregate(Avg("Marks", default=0))
 print(q5)
+
+
+#  get the total percentage of marks for a student in each sem
+q6=Student.objects.filter(id=5).annotate(sem_percentage=ExpressionWrapper((Sum('marks__Marks') / Count('marks__Sub_Id')),output_field=FloatField())).values('marks__Sem_Id','sem_percentage')
+for q in q6:
+    print(q)
