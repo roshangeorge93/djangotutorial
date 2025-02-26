@@ -1,7 +1,8 @@
 {% if Marks_list %}
+<h1>Percentage of each sem</h1>
     <ul>
     {% for marks in Marks_list %}
-        <li><a >Sem {{marks.marks__Sem_Id}}: {{ marks.sem_percentage }}</a></li>
+        <li><strong>Sem {{marks.marks__Sem_Id}}:</strong> {{ marks.sem_percentage }}%</li>
     {% endfor %}
     </ul>
 {% else %}

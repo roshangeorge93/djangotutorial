@@ -1,4 +1,7 @@
+
+
 {% if student_list %}
+<h1>Student details</h1>
     <ul>
     {% for student in student_list %}
         <li><a href="{{ student.id }}/">{{ student.Name }}</a></li>
