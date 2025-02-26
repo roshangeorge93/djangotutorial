@@ -34,18 +34,3 @@ def index(request):
     return render(request, "all_students.html", context)
     
 
-
-
-# Leave the rest of the views (detail, results, vote) unchanged
-
-
-# def resp (request ,element_id ):
-#     if Employee.objects.filter(id=element_id).exists():
-#         print(Employee.objects.filter(id=element_id).values('ename'))
-#         return HttpResponse( Employee.objects.get(id=element_id))
-#         return HttpResponse( Employee.objects.filter(id=element_id).values('ename')[0]['ename'])
-
-
-#     return  HttpResponse(f"employee with this {element_id} is not present")
-
-# Create your views here.
