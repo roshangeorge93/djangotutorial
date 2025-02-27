@@ -25,7 +25,7 @@ def product_index(request):
 
 
 def categories(request):
-    leaf = Category.objects.get(name='cname3')
+    leaf = Category.objects.get(name='cname6')
     cat_list = Category.objects.all()
     sub_categories=[]
     for cat in cat_list:
@@ -33,6 +33,6 @@ def categories(request):
             sub_categories.append(cat.name)
             pass
     context = {
-        'child_categories': sub_categories,
+        'sub_categories': sub_categories,
     }
-    return render(request, 'category.html', context)
+    return HttpResponse (sub_categories)
