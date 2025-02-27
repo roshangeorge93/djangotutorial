@@ -1,0 +1,63 @@
+Employee Table
+
+----for a department fetch the empolyee id and name---
+dept =  Department.objects.get(id = 1)
+Employee.objects.filter(d_id=dept).values('id','name')
+
+----employee name and their respective departments----
+emp = Employee.objects.select_related('d_id').all()
+for emps in emp :
+print(f"{emps.name} belongs to {emps.d_id.name}")
+
+----department location-----
+dept =  Department.objects.select_related('location').all()
+for depts in dept :
+    print(f"{depts.name} is present in {depts.location.city}_{depts.location.state}_{depts.location.country}")
+
+
+---Given an employee name get all the number assigned-----
+emp = Employee.objects.get(name='Jeevan')
+Contact.objects.filter(employee_id=emp).values('number')
+
+----GIVEN NUMBER DISPLAY THE EMPLOYEE NAME----
+con = Contact.objects.get(number='9123456738')
+Employee.objects.filter(id=con.id).values('id','name')
+
+
+student queries
+1)Give student details of sem 1 
+students = Student.objects.filter(current_sem='1')
+
+
+
+2. Semesters student have attended
+semesters = Result.objects.filter(student__usn='CS101').values('sem').distinct()
+semester_ids = [semester['sem'] for semester in semesters]
+print(f"Semesters attended by student with USN 'CS101': {', '.join(map(str, semester_ids))}")
+
+3. particular avg_result
+from django.db.models import Avg
+student_obj = student.objects.get(usn='CS103')
+avg_result = Result.objects.filter(
+    student=student_obj, 
+    sem__id=5
+).values('student').annotate(
+    total_percentage=Avg('marks')
+)
+
+student_data = student.objects.filter(
+    id=student_obj.id
+).values(
+    'usn', 'current_sem'
+).annotate(
+    total_percentage=Avg('result__marks')
+)
+
+for data in student_data:
+    print(data['usn'], data['current_sem'], data['total_percentage'])
+
+
+# Step 1: Fetch the category with id 'cid5'
+category = Category.objects.get(id='5')
+
+
