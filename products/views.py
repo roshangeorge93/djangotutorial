@@ -43,7 +43,39 @@ def index(request):
     
 
 
-def resp (request ,element_id ):
-    category_list = Category.objects.all()
+def product (request  ):
+    try:
+        employee_obj = Product.objects.get(p_id ='P001')
+    except:
+        return  HttpResponse(f"employee with this is not present " )
+    
+    employee ={
+        'name' : employee_obj.p_name,
+        'id' : employee_obj.p_id,
+
+
+       
+    }
+
+    context ={
+        'employee' : employee
+    }
+    
+    return render(request, "product.html", context)
+      
+
+from django.http import HttpResponse
+
+
+def products(request):
+    employee_list = Product.objects.all()
+    template = loader.get_template("index.html")
+    context = {
+        "employee_list": employee_list ,
+    }
+    return render(request, "produts.html", context)
+
+    return HttpResponse( employee_list[0].P_id)
+
 
 

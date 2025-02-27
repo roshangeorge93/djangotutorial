@@ -1,0 +1,21 @@
+.container{
+  display:flex;  
+  justify-content: center;
+  background-color: aqua !important ;
+}
+
+td,th{
+ font-size: 25px;
+ padding: 10px;
+ border-radius: 5px;
+ text-align: center;
+ 
+
+}
+td{
+  width:100px;
+}
+
+tr:hover{
+  background-color: aliceblue;
+}

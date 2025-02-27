@@ -18,7 +18,7 @@ class Brand(models.Model):
         return self.b_name
 
 class Product(models.Model):
-    P_id = models.CharField(max_length=5, primary_key=True)
+    p_id = models.CharField(max_length=5, primary_key=True)
     p_name = models.CharField(max_length=20)
     cat_id = models.ForeignKey(Category, on_delete=models.CASCADE, to_field='cat_id')
     b_id = models.ForeignKey(Brand, on_delete=models.CASCADE, to_field='b_id')

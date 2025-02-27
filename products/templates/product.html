@@ -2,26 +2,23 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% load static %}
-
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
-<div class="container"></div>
+<div class="container">
 
 {% if employee %}
-
-    <table class="table table-bordered text-center" >
+    <table class="table table-bordered text-center " >
     <tr class="align-middle" >
     <th scope="col" >Name</th>
-    <th scope="col" >Eid</th>
-    <th scope="col">Designation</th>
+    <th scope="col" >Pid</th>
     </tr>
     <tr class="align-middle" >
     <td scope="col" >{{employee.name}}</td> 
     <td scope="col" >{{employee.id}}</td>      
-    <td scope="col" >{{employee.Designation}}</td>      
      
     </tr>
     </table>
+</div>
 
 {% block content %}
 {% endblock %}
