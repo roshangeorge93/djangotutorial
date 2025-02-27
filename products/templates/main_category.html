@@ -1,0 +1,9 @@
+{% if category_list %}
+    <ul>
+    {% for category in category_list %}
+        <li>{{ category.name}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No products are available.</p>
+{% endif %}

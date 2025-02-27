@@ -1,0 +1,23 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="{% static 'students.css' %}">
+<body>
+
+{% if student_list %}
+<h1>Students List</h1>
+  <div class="container">
+    <ol>
+        {% for student in student_list %}
+            <li><a href="/student/{{ student.id }}/">{{ student.name}}</a></li>
+        {% endfor %}
+        </ol>
+  </div>
+   
+{% else %}
+    <p>No students are available.</p>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,260 @@
+from django.db.models import ExpressionWrapper, Count, Value, DecimalField
+from django.db.models import Sum,Count
+
+# Employee app:
+# ----------------------query1-----------------------------------------------------------------------------------------
+# ------SQL QUERY-------------
+# SELECT employee.e_id,employee.e_name,employee.e_email, department.d_name
+# FROM department
+# LEFT JOIN employee ON department.d_id = employee.d_id;
+
+----DJANGO EQUIVALENT-------
+from Employee.models import Employee,Department
+employees=Employee.objects.select_related('department_id').values('id','name','email','department_id__name')
+for employee in employees:
+         print(employee)
+----------------------------------------------------------------------------------------------------------------------
+----------------------query2-----------------------------------------------------------------------------------------
+SELECT
+	employee.e_id,
+	employee.e_name,
+	employee.e_email,
+	department.d_name,
+	concat(location.loc_city, '-', LOCATION.loc_state, '-', LOCATION.loc_country) AS city_state_country
+FROM
+	employee
+	JOIN department ON employee.d_id = department.d_id
+	JOIN location ON LOCATION.loc_id = department.loc_id;
+
+----DJANGO EQUIVALENT-------
+from django.db.models import Value as V,F
+from django.db.models.functions import Concat
+results=Employee.objects.select_related('department__id','department__location_id').annotate(city_state_country=Concat(F('department_id__location_id__city'),V('_'),F('department_id__location_id__state'),V('_'),F('department_id__location_id__country'))).values('id','name','email','department_id__name','city_state_country')
+
+for result in results:
+	print(result)
+----------------------------------------------------------------------------------------------------------------------
+---------------------query3---------------------------------------------------------------------------
+-- Get all contacts based on emp_name
+select contact.number from contact
+left join employee
+on contact.employee_id=employee.e_id
+where employee.e_name='Jeevan';
+
+----DJANGO EQUIVALENT-------
+contacts_result=Contact.objects.select_related('employee').filter(employee_id__name='Jeevan').values('number')
+print(contacts_result)
+----------------------------------------------------------------------------------------------------------------------
+---------------------query4---------
+-- Given a contact number find who it is associated with
+select employee.e_name
+from employee
+join contact
+on employee.e_id=contact.employee_id
+where contact.number=897546789;
+
+----DJANGO EQUIVALENT-------
+employee_result=Contact.objects.select_related('employee').filter(number=897546789).values('employee__name')
+print(employee_result)
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+
+students app:
+
+-- List all students belonging to sem1
+select * from student 
+where current_sem='1';
+
+----DJANGO EQUIVALENT-------
+sem1_students=Student.objects.filter(current_sem=1).values('name')
+for student in sem1_students:
+   print(student)
+
+----------------------------------------------------------------------------------------------------------------------
+
+-- Get all marks of a student (given usn) for a particular subject
+SELECT
+	result.marks
+FROM
+	result
+	JOIN student ON result.student_id = student.id
+	JOIN subject ON result.subject_id = subject.id
+WHERE
+	student.usn = 'vv001'
+	AND subject.name = 'student2';
+
+----DJANGO EQUIVALENT-------
+marks=Result.objects.select_related('student','subject').filter(student_id__usn='vv001',subject_id__name='subject2').values('marks').first()
+print(f"{marks['marks']}")
+
+----------------------------------------------------------------------------------------------------------------------
+
+-- Get all marks of a student given usn for the latest semester 
+SELECT
+	result.marks
+FROM
+	result
+	join 
+	student
+on
+	result.student_id = student.id
+	AND student.usn = 'vv404' AND
+	RESULT.sem_id=student.current_sem;
+
+----DJANGO EQUIVALENT------
+latest_sem_marks=Result.objects.select_related('student').filter(student_id__usn='vv404',semester_id=F('student__current_sem')).values('marks')
+for result in latest_sem_marks:
+     print(result)
+----------------------------------------------------------------------------------------------------------------------
+
+-- What all semester has the student attended
+SELECT string_agg(sem::TEXT,',') as total_sems_attended
+FROM generate_series(1,(select current_sem from student WHERE student.name='student5')) AS sem;
+
+----DJANGO EQUIVALENT-------
+cur_sem=Student.objects.filter(usn='vv404').values_list('current_sem',flat=True).first()
+all_sems=list(range(1,cur_sem+1))
+print(all_sems)
+
+----------------------------------------------------------------------------------------------------------------------
+
+-- Get the total percentage of marks for a student in a sem
+select round((sum(result.marks::NUMERIC) / count(result.subject_id)),2) as percentage from result,student  where result.student_id=student.id AND result.sem_id=2 AND student.usn='vv001';
+
+----DJANGO EQUIVALENT-------
+percentage=Result.objects.select_related('student','subject').filter(semester_id=1,student_id__usn='vv404').annotate(t_marks=ExpressionWrapper((Sum('marks') /Count('subject')),output_field=FloatField())).values('t_marks')
+
+print(Student.objects.filter(usn='vv404', result__semester__semester_number=1).annotate(t_marks=ExpressionWrapper((Sum('result__marks') / Count('result__subject')),output_field=FloatField())).values())
+
+----------------------------------------------------------------------------------------------------------------------
+-- Get the total percentage of marks for a student in each semester.
+
+SELECT
+	RESULT.sem_id,
+	round((sum(result.marks)::NUMERIC / count(result.subject_id)), 2) AS percentage
+FROM
+	result,
+	student
+WHERE
+	result.student_id = student.id
+	AND student.usn = 'vv001'
+GROUP BY
+	RESULT.sem_id;
+----------------------------------------------------------------------------------------------------------------------
+
+-- Get total percentage of marks for a student
+SELECT
+	 round  (sum(result.marks)::NUMERIC / count(result.subject_id), 2) AS total_percentage
+FROM
+	result,
+	student
+WHERE
+	result.student_id = student.id
+	AND student.usn = 'vv001';
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+
+products:app
+
+SELECT
+	products.product_id,
+	products.product_name,
+	products.product_price,
+	products.product_rating,
+	brand.brand_name,
+	brand.brand_id,
+	category.category_name
+FROM
+	products
+	JOIN brand ON products.brand_id = brand.brand_id
+	JOIN category ON category.category_id = products.category_id;
+
+----DJANGO EQUIVALENT-------
+products=Product.objects.select_related('category','brand').values('id','name','price','rating','brand__name','brand__id','category__name')
+for product in products:
+   print(product)
+
+----------------------------------------------------------------------------------------------------------------------
+-- list all products
+select * from products;
+
+----DJANGO EQUIVALENT-------
+all_products=Product.objects.all().values()
+for product in all_products:
+        print(product)
+
+----------------------------------------------------------------------------------------------------------------------
+-- given a category_id ,list the products
+select * from products left join category on products.category_id=category.category_id  where category.category_id='c_id1';
+
+----DJANGO EQUIVALENT-------
+products=Product.objects.select_related('category').filter(category_id__id=1).values()
+for product in products:
+         print(product)
+
+----------------------------------------------------------------------------------------------------------------------
+--list all products and filter based on cat_name
+select * from products left join category on products.category_id=category.category_id where category.category_name='c_name1';
+
+----DJANGO EQUIVALENT-------
+products=Product.objects.select_related('category').filter(category_id__name='category4').values()
+for product in products:
+         print(product)
+
+----------------------------------------------------------------------------------------------------------------------
+-- list all categories and their products
+select * from category left join products on products.category_id=category.category_id;
+
+----DJANGO EQUIVALENT-------
+-- categories=Category.objects.prefetch_related('product_set').all().values()
+
+----------------------------------------------------------------------------------------------------------------------
+-- list all products and print their brand name
+SELECT * from products left join brand on brand.brand_id=products.brand_id;
+
+----DJANGO EQUIVALENT-------
+products=Product.objects.select_related('brand').all().values('id','name','brand__name')
+for product in products:
+         print(product)
+
+----------------------------------------------------------------------------------------------------------------------
+-- list all sub_categories under a category(based on cat_id)
+select * from category where category.parent_category_id='pc_id5';
+
+----DJANGO EQUIVALENT-------
+sub_categories=Category.objects.filter(parent_category_id=1).values()
+for category in sub_categories:
+     print(category)
+
+----------------------------------------------------------------------------------------------------------------------
+-- list all sub_categories under a list of categories(based on id)
+SELECT * FROM category
+WHERE category.parent_category_id IN ('pc_id1','pc_id5','pc_id2');
+
+----DJANGO EQUIVALENT-------
+sub_categories=Category.objects.filter(parent_category_id__in=[1,2]).values()
+for category in sub_categories:
+     print(category)
+----------------------------------------------------------------------------------------------------------------------
+-- list all sub_category under a category(based on name):using self join
+select  c.category_id as sub_categories from category c  join category p on c.parent_category_id=p.category_id where p.category_name='c_name2';
+
+
+
+
+
+
+
+
+
+SELECT "students_student"."id", "students_student"."usn", "students_student"."name", "students_student"."current_sem", (SUM("students_result"."marks") / COUNT("students_result"."subject_id")) AS "t_marks" FROM "students_student" INNER JOIN "students_result" ON ("students_student"."id" = "students_result"."student_id") INNER JOIN "students_sem" ON ("students_result"."semester_id" = "students_sem"."id") WHERE ("students_sem"."semester_number" = 1 AND "students_student"."usn" = vv404) GROUP BY "students_student"."id"
+
+
+
+SELECT "students_result"."id", "students_result"."student_id", "students_result"."subject_id", "students_result"."marks", "students_result"."semester_id", (SUM("students_result"."marks") / COUNT("students_result"."subject_id")) AS "t_marks" FROM "students_result" INNER JOIN "students_student" ON ("students_result"."student_id" = "students_student"."id") WHERE ("students_result"."semester_id" = 1 AND "students_student"."usn" = vv404) GROUP BY "students_result"."id"

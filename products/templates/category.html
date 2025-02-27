@@ -1,0 +1,14 @@
+{% if sub_categories%}
+    <ul>
+    {% for category in sub_categories %}
+        <li >{{ category }}</a></li>
+    {% endfor %}
+    </ul>
+ 
+    {% block content %}
+    {% endblock %}
+ 
+{% else %}
+    <p>No subcategories are available.</p>
+{% endif %}
+

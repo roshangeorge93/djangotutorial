@@ -85,7 +85,7 @@ for category in sub_categories:
 # select  c.category_id as sub_categories from category c  join category p on c.parent_category_id=p.category_id where p.category_name='c_name2';
 
 # ----DJANGO EQUIVALENT-------
-parent_category=Category.objects.filter(name='category2').first()
+parent_category=Category.objects.get(name='category1')
 
 if parent_category:
        subcategories=Category.objects.filter(parent_category_id=parent_category.id)
