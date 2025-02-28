@@ -4,6 +4,7 @@ from .models import Product ,Category
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 from django.db.models import ExpressionWrapper , Sum ,Count,Avg, FloatField
+import base64
 
 
 def resp (request ,element_id ):
@@ -60,19 +61,24 @@ def product (request ,cat_name ):
 
     except:
         return  HttpResponse(f"No products or Invalid category " )
-
+    img =[]
     result = []
     for product in products:
         for cate in category_list:
             if (product.cat_id_id == cate.cat_id) :
                 result.append(product)
+                product.image_a = base64.b64encode(product.image).decode('utf-8')
 
 
 
+                
+
+
+    
             
     
     context ={
-       "result": result , "category_list":category_list
+       "result": result , "category_list":category_list 
     }
     
     return render(request, "product.html", context)
