@@ -43,7 +43,7 @@ def index(request):
     
 
 
-def product (request  ):
+def product (request ):
     try:
         employee_obj = Product.objects.get(p_id ='P001')
     except:

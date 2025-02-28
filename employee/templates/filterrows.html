@@ -1,0 +1,49 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+
+
+<script src="{% static 'filter.js' %}"></script>
+
+
+
+{% if options %}
+
+  
+
+<label for="cars">Filter employee:</label>
+<select name="emp" id="emp" onchange="abc(value)">
+    <option value="default"   >All</option>
+    {% for question in options %}
+        
+         <option value={{question.id}} {% if id == question.id %} 
+         selected
+      {%endif%}
+
+         >{{ question.ename}}</option>
+    {% endfor %}
+</select>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+
+{% if employee_list %}
+
+  
+
+
+    <ul  class="list-group">
+    {% for question in employee_list %}
+        <li class="list-group-item"><a href="/emp/{{ question.id }}/">{{ question.ename }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% block content %}
+{% endblock %}
