@@ -2,13 +2,30 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'styles.css' %}">
 
 <div class="container">
 
 {% if result %}
+<div class="container mt-5">
+
 {% for question in result %}
-<li class="list-group-item"><a href="/categories/products/1">{{ question.p_name }}</a></li>
+<div class="card" style="max-width: 320px">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxzaG9lfGVufDB8MHx8fDE3MjEwNDEzNjd8MA&ixlib=rb-4.0.3&q=80&w=1080" class="card-img-top" alt="Product Image">
+    <div class="card-body">
+        <h5 class="card-title">{{ question.p_name }}</h5>
+        <p class="card-text">Short product description goes here.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="h5 mb-0">$99.99</span>
+            <div>
+                <small class="text-muted">(4.5)</small>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between bg-light">
+        <button class="btn btn-primary btn-sm">Add to Cart</button>
+    </div>
+</div>
+<!-- <li class="list-group-item">{{ question.p_name }}</li> -->
     <!-- <li class="list-group-item"><a href="/categories/products/{{question.p_name}}/">{{ question.p_name }}</a></li> -->
 {% endfor %}
 </div>
