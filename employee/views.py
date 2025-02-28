@@ -23,6 +23,7 @@ def respond (request):
 def resp (request ,element_id ):
     try:
         employee_obj = Employee.objects.get(id=element_id)
+
     except:
         return  HttpResponse(f"employee with this {element_id} is not present " )
     
@@ -43,10 +44,18 @@ from django.http import HttpResponse
 
 
 def index(request):
-    employee_list = Employee.objects.all()
+    options = Employee.objects.all()
+    id = request.GET.get('id', 'default')
+    employee_list = [Employee.objects.get(id= int(id))]
+
+
+    if request.GET.get('id', 'default') =='default':
+        employee_list = Employee.objects.all()
+
+
     template = loader.get_template("index.html")
     context = {
-        "employee_list": employee_list ,
+        "employee_list": employee_list , "options":options
     }
     return render(request, "index.html", context)
     
