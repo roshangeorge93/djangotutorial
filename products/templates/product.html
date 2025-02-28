@@ -1,0 +1,22 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+
+<div class="container">
+
+{% if result %}
+{% for question in result %}
+<li class="list-group-item"><a href="/categories/products/1">{{ question.p_name }}</a></li>
+    <!-- <li class="list-group-item"><a href="/categories/products/{{question.p_name}}/">{{ question.p_name }}</a></li> -->
+{% endfor %}
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

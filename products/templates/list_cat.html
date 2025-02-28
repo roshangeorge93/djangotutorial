@@ -1,0 +1,17 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% if children_categories %}
+    <ul class="list-group">
+    {% for students in children_categories %}
+        <li class="list-group-item" >{{ students }}</a></li>
+    {% endfor %}
+    </ul>
+
+    {% block content %}
+    {% endblock %}
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

@@ -1,0 +1,12 @@
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+
+body {
+    background-color: aqua;
+}
+  
+  th, td {
+    padding: 8px;
+  }
