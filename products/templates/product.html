@@ -1,0 +1,29 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+
+<div class="container">
+
+{% if employee %}
+    <table class="table table-bordered text-center " >
+    <tr class="align-middle" >
+    <th scope="col" >Name</th>
+    <th scope="col" >Pid</th>
+    </tr>
+    <tr class="align-middle" >
+    <td scope="col" >{{employee.name}}</td> 
+    <td scope="col" >{{employee.id}}</td>      
+     
+    </tr>
+    </table>
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
