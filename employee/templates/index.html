@@ -1,0 +1,17 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% if employee_list %}
+    <ul  class="list-group">
+    {% for question in employee_list %}
+        <li class="list-group-item"><a href="/emp/{{ question.id }}/">{{ question.ename }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% block content %}
+{% endblock %}
+<!-- ------------------------------- -->
