@@ -45,17 +45,17 @@ from django.http import HttpResponse
 
 def index(request):
     options = Employee.objects.all()
-    id = request.GET.get('id', 'default')
-    employee_list = [Employee.objects.get(id= int(id))]
-
+    id = 0
 
     if request.GET.get('id', 'default') =='default':
         employee_list = Employee.objects.all()
-
+    if request.GET.get('id', 'default') !='default':
+        id = request.GET.get('id', 'default')
+        employee_list = [Employee.objects.get(id= int(id))]
 
     template = loader.get_template("index.html")
     context = {
-        "employee_list": employee_list , "options":options
+        "employee_list": employee_list , "options":options ,'id':int(id)
     }
     return render(request, "index.html", context)
     
