@@ -6,18 +6,11 @@
 
 <div class="container">
 
-{% if employee %}
-    <table class="table table-bordered text-center " >
-    <tr class="align-middle" >
-    <th scope="col" >Name</th>
-    <th scope="col" >Pid</th>
-    </tr>
-    <tr class="align-middle" >
-    <td scope="col" >{{employee.name}}</td> 
-    <td scope="col" >{{employee.id}}</td>      
-     
-    </tr>
-    </table>
+{% if result %}
+{% for question in result %}
+<li class="list-group-item"><a href="/categories/products/1">{{ question.p_name }}</a></li>
+    <!-- <li class="list-group-item"><a href="/categories/products/{{question.p_name}}/">{{ question.p_name }}</a></li> -->
+{% endfor %}
 </div>
 
 {% block content %}
