@@ -4,7 +4,7 @@
 {% load static %}
 
 <script src="{% static 'filter.js' %}"></script>
-
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 
 {% if options %}
 
@@ -35,7 +35,7 @@
     {% for employee in employee_list %}
         
         <tr class="align-middle" >
-        <td scope="col" >{{employee.ename}}</td> 
+        <td scope="col" > <a href="/emp/{{ employee.id }}/">{{employee.ename}}</a> </td> 
         <td scope="col" >{{employee.id}}</td>      
         <td scope="col" >{{employee.designation}}</td>      
          

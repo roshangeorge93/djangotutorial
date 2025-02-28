@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Employee ,Contact
+from .models import Employee ,Contact ,Department
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 
@@ -23,6 +23,8 @@ def respond (request):
 def resp (request ,element_id ):
     try:
         employee_obj = Employee.objects.get(id=element_id)
+        department_obj = Department.objects.get(id=employee_obj.dept_id_id)
+
 
     except:
         return  HttpResponse(f"employee with this {element_id} is not present " )
@@ -30,7 +32,9 @@ def resp (request ,element_id ):
     employee ={
         'name' : employee_obj.ename,
         'id': employee_obj.eid,
-        'Designation': employee_obj.designation
+        'Designation': employee_obj.designation,
+        'deparment': department_obj.dept_name
+
     }
 
     context ={
