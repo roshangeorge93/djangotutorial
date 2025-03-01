@@ -1,3 +1,4 @@
+
 """
 URL configuration for mysite project.
 
@@ -15,14 +16,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+
+from . import views
+from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("employee/", include("employees.urls")),
-    path("student/", include("student.urls")),
-    path("products/",include("products.urls")),
-    
-    
-
+    path('<int:product_P_Id>/', views.display,name="display"),
+    path("",views.index,name="index"),
+    path("catageory/",views.catageory,name="catageory"),
+    path("catageory/<int:catageory_Cat_Id>/",views.sub_categeories,name="sub_categeories")
 ]
+

@@ -1,0 +1,10 @@
+{% if product_list %}
+<h1>Product List</h1>
+    <ul>
+    {% for product in product_list %}
+        <li> <a href="{{ product.P_Id }}/"> {{ product.P_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Products are available.</p>
+{% endif %}
