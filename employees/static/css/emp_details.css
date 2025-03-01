@@ -1,0 +1,101 @@
+
+    .navbar{
+    padding:0px;
+    height:100px;
+    color:white;
+    background-color: black;
+}
+
+.container-fluid{
+background-color:bisque;
+height:80px;
+}
+.navbar-brand{
+    margin-left: 130px;
+    text-align: center;
+    
+}
+.project {
+    border: solid;
+    border-color: white;
+    background-color:white;
+box-shadow: whitesmoke;   
+
+    
+    
+}
+.profile-container{
+
+    padding-top:20px;
+    box-shadow: whitesmoke ;
+    background-color:whitesmoke
+    /* rgb(235, 230, 223); */
+   
+}
+.profile-picture{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.img1{
+    border-radius: 50%;
+    width:300px;
+    height:300px;
+    object-fit: cover;
+    object-position: 0 10;
+    align-items: center;
+    padding:10px 10px 10px 10px;
+  }
+.profile-details{
+     
+    display: flex;
+   
+}
+.profile-info{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+@media (max-width : 800px){
+ 
+    img {
+        border-radius: 50%;
+    }
+    .profile-picture{
+        padding: 10px;
+ 
+    }
+ 
+    .profile-details{
+         
+        display: flex;
+        flex-direction: column;
+       
+        justify-content: space-around;
+        align-items: center;
+       
+    }
+    .profile-info{
+        display: flex;
+        flex-direction: column;
+       
+    }
+    p,h4{
+      
+text-align: center;
+    }
+    .information{
+        position: relative;
+        left:30px;
+    }
+    .profile-container{
+        box-shadow: inset;
+       
+       
+    }
+ 
+}
+
