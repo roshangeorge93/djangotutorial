@@ -37,7 +37,8 @@ from django.urls import include, path
 urlpatterns = [
     path("<int:employee_id>/", views.employee,name="employee"),
     # path("<int:employee_id>/", views.detail, name="detail"),
-    path("",views.index,name="index")
+    path("",views.index,name="index"),
+    path("test/",views.test,name="test")
  ]
 
 

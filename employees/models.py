@@ -25,6 +25,7 @@ class Employee(models.Model):
     department=models.ForeignKey(
         "Department", on_delete=models.CASCADE)
     Experience=models.SmallIntegerField()
+    photo=models.CharField(max_length=200,default="", editable=False)
 
 class Contact(models.Model):
     Number=models.CharField(max_length=200)

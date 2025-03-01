@@ -6,7 +6,8 @@ from django.http import HttpResponse
 
 
 def employee(request,employee_id):
-    Employee_details=Employee.objects.filter(id=employee_id).values()
+    Employee_details=Employee.objects.filter(id=employee_id).select_related('department__l').all()
+    
     
     
     context = {
@@ -15,18 +16,7 @@ def employee(request,employee_id):
     
     return render(request, "Employee_details.html", context)
   
-# def detail(request, employee_id):
 
-#     return HttpResponse("You're looking at employee %s." % employee_id)
-
-
-# def results(request, employee_id):
-#     response = "You're looking at the results of question %s."
-#     return HttpResponse(response % employee_id)
-
-
-# def vote(request, employee_id):
-#     return HttpResponse("You're voting on question %s." % employee_id)
 
 
 
@@ -36,10 +26,15 @@ from django.template import loader
 
 
 def index(request):
-    employee_list = Employee.objects.all()
+    employee_list = Employee.objects.select_related('department__l').all()
     
     context = {
         "employee_list": employee_list,
     }
     
     return render(request, "index.html", context)
+
+
+def test(request):
+    
+    return render(request,"test.html")
