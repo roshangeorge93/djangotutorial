@@ -42,7 +42,7 @@
 <head>
     <style>
         img {
-            border-radius: 50%;
+            border-radius: 50%  ;
             width: 200px;
             height: 200px;
         }
@@ -129,7 +129,7 @@
     <div class="container profile-container">
         <div class="row justify-content-center">
             <div class="col-md-4 text-center">
-                <img src="image.avif" alt="Profile Picture">
+                <img src="data:image/jpeg;base64,{{employee.image}}"  alt="Product Image">
             </div>
             <div class="col-md-8">
                 <div class="profile-info">
@@ -137,10 +137,10 @@
                     <p>{{employee.Designation}}</p>
                     <div class="information">
                         <ul class="list-unstyled">
-                            <li><strong>Manager:</strong> Sanjay Sharma</li>
+                            <li><strong>Location:</strong> {{employee.location}} </li>
                             <li><strong>Department:</strong> {{employee.deparment}}</li>
-                            <li><strong>Date of Joining:</strong> 12/02/2018</li>
-                            <li><strong>Email Address:</strong> Sanjay.krishnamoorthy@galepartners.com</li>
+                            <li><strong>Date of Joining:</strong> {{employee.date}}</li>
+                            <li><strong>Email Address:</strong> {{employee.email}}</li>
                         </ul>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
             event.preventDefault();
             let name = document.getElementById("name").value;
             let message = document.getElementById("message").value;        
-            let mailtolink = `mailto:yashyash517@gmail.com?&subject=Reach out &body=Hi I'm ${name}. ${name} says ${message}`;
+            let mailtolink = `mailto:{{employee.email}}?&subject=Reach out &body=Hi I'm ${name}. ${name} says ${message}`;
             window.location.href = mailtolink;
         }
 

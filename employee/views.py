@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Employee ,Contact ,Department
+from .models import Employee ,Contact ,Department ,Location
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
-
+import base64
 
 
 def respond (request):
@@ -24,6 +24,9 @@ def resp (request ,element_id ):
     try:
         employee_obj = Employee.objects.get(id=element_id)
         department_obj = Department.objects.get(id=employee_obj.dept_id_id)
+        location_obj = Location.objects.get(id=employee_obj.location_id)
+
+
 
 
     except:
@@ -33,7 +36,12 @@ def resp (request ,element_id ):
         'name' : employee_obj.ename,
         'id': employee_obj.eid,
         'Designation': employee_obj.designation,
-        'deparment': department_obj.dept_name
+        'deparment': department_obj.dept_name,
+        'image' :  base64.b64encode(employee_obj.image).decode('utf-8'),
+        'location' : location_obj.loc_name,
+        'date' : employee_obj.date_of_joining,
+        'email':employee_obj.email
+
 
     }
 
