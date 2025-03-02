@@ -23,7 +23,9 @@ from django.urls import include, path
 urlpatterns = [
     path('', views.index,name="index"),
     path("<int:student_id>/", views.display,name="display"),
-    # path(" ",views.display,name="display"),
+    path("form/",views.student_form_view,name="student_form_view"),
+    path("form/result/",views.result,name="result"),
+
     
  ]
 
